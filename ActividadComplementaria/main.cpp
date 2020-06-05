@@ -22,13 +22,13 @@ class Device{
     double priceDevice;
     int codDevice;
     string descDevice;
-  public:
-      Device(double, int, string);
-      Device(string, double, int);
-      virtual void Print();
-      void Work();
-      void UseEnergy();
-      void TurnOff();
+    Device();
+    Device(double, int, string);
+    Device(string, double, int);
+    virtual void Print()=0;
+    virtual void Work()=0;
+    virtual void UseEnergy()=0;
+    virtual void TurnOff();
 };
 
 class Processor : public Device{
@@ -36,12 +36,13 @@ class Processor : public Device{
     int genProcessor;
     float GHrz;
   public:
-      Processor(double, int, string, int, float);
-      void Print();
-      void Process();
-      void Read();
-      void Write();
-      
+    Processor();
+    Processor(int, float);
+    void Print();
+    void Process();
+    void Read();
+    void Write();
+    
 };
 
 class Smartphone : public Device{
@@ -50,11 +51,13 @@ class Smartphone : public Device{
     string specsS;
     string Gamma;
   public:
-      Smartphone(int, int, string, int, float, string);
-      void Call();
-      void Write();
-      void TakePhotos();
-      void Charge();
+    Smartphone();
+    Smartphone(int, string, string);
+    void Print();
+    void Call();
+    void Write();
+    void TakePhotos();
+    void Charge();
       
 };
 
@@ -67,14 +70,6 @@ Device::Device(double price,int cod,string Desc){
     this->descDevice=Desc;
     
     
-}
-Device::Device(string Desc,double price, int cod){
-  
-    this->descDevice=Desc;
-    this->priceDevice= price;
-    this->codDevice=cod;
-  
-
 }
 void Device::TurnOff(){
 
@@ -96,65 +91,65 @@ void Device::Print(){
 
 
 
-Alumno::Alumno(int _edad,int _dni,string _nombre,int _codigoAlumno,float _nota,int _semestre): Persona(_edad,_dni,_nombre){
-  codigoAlumno= _codigoAlumno;
-  nota= _nota;
-  semestre= _semestre;
+Processor::Processor(int genProcessor, float GHrz){
+    
+    this->genProcessor=genProcessor;
+    this->GHrz=GHrz;
+    
+}
+void Processor::Process(){
+
+    cout<<"Processing..."<<endl;
 
 }
-void Alumno::leer (){
+void Processor::Read(){
 
-  cout<<"Soy : "<<nombre<<" y estoy leyendo."<<endl;
-
-}
-void Alumno::atender (){
-
-  cout<<"Soy : "<<nombre<<" y estoy atendiendo."<<endl;
-
-}
-
-void Alumno:: mostrar(){
-
-  Persona::mostrar();
-  cout<<"Codigo Alumno: "<<codigoAlumno<<endl;
-  cout<<"nota: "<<nota<<endl;
-  cout<<"Semestre: "<<semestre<<endl;
-
-}
-void Alumno::resolver (){
-
-  cout<<"Soy : "<<nombre<<" y estoy saltando."<<endl;
+    cout<<"Reading..."<<endl;
 
 }
 
-Profesor::Profesor(int _edad,int _dni,string _nombre,int _codigoProfesor,float _sueldo,string _curso): Persona(_edad,_dni,_nombre){
-  codigoProfesor= _codigoProfesor;
-  sueldo= _sueldo;
-  curso= _curso;
+void Processor::Write(){
+    
+    cout<<"Writing..."<<endl;
+    
+}
+
+void Processor::Print(){
+
+    Device::Print();
+    cout<<"Processor generation: "<<genProcessor<<endl;
+    cout<<"Speed in GHz: "<<GHrz<<endl;
 
 }
-void Profesor::Dictarclases (){
 
-  cout<<"Soy : "<<nombre<<" y estoy dictando clases."<<endl;
-
-}
-void Profesor::Ponernotas (){
-
-  cout<<"Soy : "<<nombre<<" y estoy poniendo notas."<<endl;
+Smartphone::Smartphone(int numSerieS, string specsS, string Gamma){
+  
+    this->numSerieS=numSerieS;
+    this->specsS=specsS;
 
 }
-void Profesor::resolver (){
+void Smartphone::Call(){
 
-  cout<<"Soy : "<<nombre<<" y estoy poniendo notas."<<endl;
+  cout<<"Calling..."<<endl;
 
 }
-void Profesor:: mostrar(){
+void Smartphone::Write (){
 
-  Persona::mostrar();
-  cout<<"Codigo Profesor: "<<codigoProfesor<<endl;
-  cout<<"Sueldo: "<<sueldo<<endl;
-  cout<<"Curso: "<<curso<<endl;
+  cout<<"Writing..."<<endl;
 
+}
+void Smartphone::TakePhotos(){
+
+  cout<<"Taking pics..."<<endl;
+
+}
+void Smartphone::Print() {
+
+    Device::Print();
+    cout<<"Serial Number: "<<numSerieS<<endl;
+    cout<<"Specifications: "<<specsS<<endl;
+    cout<<"Gamma: "<<Gamma<<endl;
+    
 }
 template<class TipoD >
 void mostrarMayor(TipoD numero);
@@ -192,30 +187,19 @@ void mostrarMayor(TipoD numero){
     }
  
     printf("El numero maximo es: %.2f\n y fue el numero %d en ser ingresado",max,numero);
- 
-    system("PAUSE");
-    
 
 }
-
-
-
-
-
-
-
-
 
 int main() {
   int v;
 
-  Persona *vector[3];
-  
-  vector[0] = new Alumno(15,456128995,"Adolfo",86521,12.5,2);
+  Device *vector[3];
+    vector[0] = new Processor(15,456128995,"Adolfo",86521,12.5,2);
 
-  vector[0]->mostrar();
-
-  cout<<"--------------------------------"<<endl;
+    
+    vector[0]->Print();
+    printf("/r/n");
+    cout<<endl<<endl;
 
 
   vector[0] = new Profesor(35,73945202,"Maria",23546,25601.50,"Matematica");
