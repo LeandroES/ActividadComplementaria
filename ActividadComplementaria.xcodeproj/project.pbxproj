@@ -11,7 +11,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
-		B362C639248AEDD40066B1F0 /* PBXBuildRule */ = {
+		B33DEB06248B2DFE00FE6C1D /* PBXBuildRule */ = {
 			isa = PBXBuildRule;
 			compilerSpec = com.intel.compilers.icc.latest;
 			fileType = sourcecode.cpp;
@@ -88,7 +88,7 @@
 				B362C62D248AEDC80066B1F0 /* CopyFiles */,
 			);
 			buildRules = (
-				B362C639248AEDD40066B1F0 /* PBXBuildRule */,
+				B33DEB06248B2DFE00FE6C1D /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
