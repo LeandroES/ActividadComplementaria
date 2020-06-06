@@ -100,6 +100,10 @@ class Smartphone : public Device{
     int numSerieS;
     string specsS;
     string Gamma;
+    
+    friend Smartphone& operator++(Smartphone&);
+    friend Smartphone& operator--(Smartphone&);
+    
   public:
     Smartphone();
     Smartphone(string descDevice, int codDevice, double priceDevice, int numSerieS, string specsS, string Gamma){
@@ -112,6 +116,15 @@ class Smartphone : public Device{
         this->priceDevice=priceDevice;
 
     }
+    
+    Smartphone(const int codDevice, const int numSerieS){
+        
+        this->numSerieS=numSerieS;
+        this->codDevice=codDevice;
+
+    }
+    
+    
     Smartphone(string descDevice, int codDevice, double priceDevice, string specsS, int numSerieS, string Gamma){
       
         this->Gamma=Gamma;
@@ -185,6 +198,18 @@ class Smartphone : public Device{
       
 };
 
+//Sobrecarga de operadores Unarios:
+
+Smartphone& operator++ (Smartphone& e) {
+ e.priceDevice = e.priceDevice + (0.5*e.priceDevice);
+ return e;
+}
+Smartphone& operator-- (Smartphone& e) {
+ e.priceDevice = e.priceDevice - (0.5*e.priceDevice);
+ return e;
+}
+
+//Funcion Generica:
 
 template <class T>
 T GetMax (T a, T b) {
@@ -204,15 +229,28 @@ int main() {
     Processor p5("Celeron Dual core",   689689, 900.99,     3,  1.5);
     Processor p6("Intel i9",            981383, 3400.99,    10, 5.1);
     
-    Smartphone s1("iPhone 6",       245245, 1300.99, 12345689, "Black Space",   "Baja");
-    Smartphone s2("iPhone 6S",      245245, 1300.99, 12345689, "Gray",          "Baja");
+    Smartphone s1("iPhone 6",       245245, 1670.99, 12345689, "Black Space",   "Baja");
+    Smartphone s2("iPhone 6S",      245245, 1100.99, 12345689, "Gray",          "Baja");
     Smartphone s3("iPhone 6S Plus", 245245, 1300.99, 12345689, "black",         "Media");
-    Smartphone s4("iPhone X",       245245, 1300.99, 12345689, "Blue Space",    "Alta");
-    Smartphone s5("iPhone XS",      245245, 1300.99, 12345689, "Veige Space",   "Alta");
-    Smartphone s6("iPhone SE",      245245, 1300.99, 12345689, "Fuchsia Space", "Baja");
+    Smartphone s4("iPhone X",       245245, 2500.99, 12345689, "Blue Space",    "Alta");
+    Smartphone s5("iPhone XS",      245245, 5200.99, 12345689, "Veige Space",   "Alta");
+    Smartphone s6("iPhone SE",      245245, 6300.99, 12345689, "Fuchsia Space", "Baja");
     
+    s1 = ++s1;
+    s3 = ++s3;
+    s5 = ++s5;
     
+    s2 = --s2;
+    s4 = --s4;
+    s5 = --s6;
     
+    cout<<"El precio del dispositivo: "<<s1.descDevice<<", ahora es: "<<s1.priceDevice<<endl;
+    cout<<"El precio del dispositivo: "<<s3.descDevice<<", ahora es: "<<s3.priceDevice<<endl;
+    cout<<"El precio del dispositivo: "<<s5.descDevice<<", ahora es: "<<s5.priceDevice<<endl;
+    printf("\r\n");
+    cout<<"El precio del dispositivo: "<<s2.descDevice<<", ahora es: "<<s2.priceDevice<<endl;
+    cout<<"El precio del dispositivo: "<<s4.descDevice<<", ahora es: "<<s4.priceDevice<<endl;
+    cout<<"El precio del dispositivo: "<<s6.descDevice<<", ahora es: "<<s6.priceDevice<<endl;
     
     return 0;
   
